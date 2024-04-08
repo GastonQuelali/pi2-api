@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:10.11  # Especifica la versión de MariaDB aquí
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ucatec
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_ARBITRARY: 1
+
+volumes:
+  mariadb_data:
